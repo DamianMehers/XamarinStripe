@@ -1,6 +1,7 @@
 # A Xamarin Stripe example
 
 Watch this video to see this example in action:
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Gd-GjT0_A4M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 The video shows using Stripe's API from a Xamarin app that runs on iOS, Android and Windows, with all the code, including the UI code being shared across all three platforms.
