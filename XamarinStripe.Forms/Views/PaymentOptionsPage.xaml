@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:XamarinStripe.Forms.ViewModels;assembly=XamarinStripe.Forms"
+             mc:Ignorable="d"
+             Title="Payment Method"
+             x:DataType="viewModels:PaymentOptionsViewModel"
+             x:Class="XamarinStripe.Forms.Views.PaymentOptionsPage">
+  <ContentPage.Content>
+    <Grid BackgroundColor="LightGray">
+      <ScrollView>
+        <ScrollView.Triggers>
+          <DataTrigger TargetType="ScrollView" Binding="{Binding Busy}" Value="true">
+            <Setter Property="Opacity" Value="0.3" />
+            <Setter Property="IsEnabled" Value="False" />
+          </DataTrigger>
+        </ScrollView.Triggers>
+        <StackLayout>
+          <Image Source="{Binding CardImage}" HeightRequest="96" Margin="48" />
+          <Label Text="Shipping Address" Padding="8" />
+
+          <StackLayout BindableLayout.ItemsSource="{Binding PaymentMethods}">
+            <BindableLayout.ItemTemplate>
+              <DataTemplate x:DataType="viewModels:PaymentMethodViewModel">
+                <StackLayout Orientation="Horizontal" BackgroundColor="White" Padding="8">
+                  <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                  </StackLayout.GestureRecognizers>
+                  <Image Source="{Binding Logo}" />
+                  <Label VerticalOptions="CenterAndExpand" >
+                    <Label.FormattedText>
+                      <FormattedString>
+                        <Span Text="{Binding Name}" FontAttributes="Bold"/>
+                        <Span Text=" Ending in "/>
+                        <Span Text="{Binding LastFour}" FontAttributes="Bold"/>
+                      </FormattedString>
+                    </Label.FormattedText>
+                  </Label>
+                  <Label HorizontalOptions="EndAndExpand"  VerticalOptions="CenterAndExpand" Text="✓" IsVisible="{Binding Selected}" />
+                </StackLayout>
+              </DataTemplate>
+            </BindableLayout.ItemTemplate>
+          </StackLayout>
+
+          <Button Text="+ Add New Card..." HorizontalOptions="FillAndExpand" BackgroundColor="White" Command="{Binding AddCardCommand}"/>
+
+          <Label Text="{Binding SampleText}" Padding="8"/>
+
+        </StackLayout>
+      </ScrollView>
+      <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding Busy}"
+                         IsRunning="{Binding Busy}" />
+    </Grid>
+  </ContentPage.Content>
+</ContentPage>

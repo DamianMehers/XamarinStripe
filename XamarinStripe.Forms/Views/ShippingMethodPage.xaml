@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:XamarinStripe.Forms.ViewModels;assembly=XamarinStripe.Forms"
+             mc:Ignorable="d"
+             x:DataType="viewModels:ShippingMethodsViewModel"
+             BackgroundColor="LightGray"
+             x:Class="XamarinStripe.Forms.Views.ShippingMethodPage">
+  <ContentPage.Content>
+    <Grid>
+      <ScrollView>
+        <ScrollView.Triggers>
+          <DataTrigger TargetType="ScrollView" Binding="{Binding Busy}" Value="true">
+            <Setter Property="Opacity" Value="0.3" />
+            <Setter Property="IsEnabled" Value="False" />
+          </DataTrigger>
+        </ScrollView.Triggers>
+        <StackLayout>
+          <Image Source="{Binding ShippingImage}" HeightRequest="96" Margin="48" />
+          <Label Text="Shipping Method" Padding="8" />
+          <StackLayout BackgroundColor="White" Padding="8" BindableLayout.ItemsSource="{Binding Methods}">
+            <BindableLayout.ItemTemplate>
+              <DataTemplate x:DataType="viewModels:ShippingMethodViewModel">
+                <Grid>
+
+                  <Grid.Resources>
+                    <Style TargetType="Label">
+                      <Style.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Selected}" Value="True">
+                          <Setter Property="TextColor" Value="Blue" />
+                        </DataTrigger>
+                      </Style.Triggers>
+                    </Style>
+                  </Grid.Resources>
+
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+
+                  <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectedCommand}"/>
+                  </Grid.GestureRecognizers>
+
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                  </Grid.RowDefinitions>
+
+                  <Label Text="{Binding Label}" Grid.Row="0" Grid.Column="0" FontAttributes="Bold" />
+                  <Label Text="{Binding Detail}" Grid.Row="1" Grid.Column="0" FontSize="Caption" />
+
+                  <Label Text="{Binding Price, StringFormat='${0:0.00}'}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"
+                         HorizontalOptions="EndAndExpand" />
+                  <Label Text="✓" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" IsVisible="{Binding Selected}"
+                         HorizontalOptions="EndAndExpand" />
+
+                </Grid>
+              </DataTemplate>
+            </BindableLayout.ItemTemplate>
+
+
+          </StackLayout>
+        </StackLayout>
+      </ScrollView>
+      <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding Busy}"
+                         IsRunning="{Binding Busy}" />
+    </Grid>
+  </ContentPage.Content>
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Done" Command="{Binding DoneCommand}" IconImageSource="{Binding DoneImage}" />
+  </ContentPage.ToolbarItems>
+
+</ContentPage>

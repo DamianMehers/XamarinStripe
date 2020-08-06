@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XamarinStripe.Forms.ViewModels;assembly=XamarinStripe.Forms"
+             xmlns:views="clr-namespace:XamarinStripe.Forms.Views;assembly=XamarinStripe.Forms"
+             mc:Ignorable="d"
+             Title="Emoji Apparel"
+             BindingContext="{x:Static vm:Locator.BrowseProducts}"
+             x:Class="XamarinStripe.Forms.Views.BrowseProductsPage">
+  <ContentPage.Content>
+    <Grid>
+      <CollectionView ItemsSource="{Binding ProductsAndPrices}"  Footer="{Binding .}">
+        <CollectionView.ItemsLayout>
+          <GridItemsLayout Orientation="Vertical" Span="2" />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+          <DataTemplate>
+            <views:ProductView/>
+          </DataTemplate>
+        </CollectionView.ItemTemplate>
+        <CollectionView.FooterTemplate>
+          <DataTemplate>
+            <StackLayout>
+              <Label Margin="16" Text=" " />
+            </StackLayout>
+          </DataTemplate>
+        </CollectionView.FooterTemplate>     
+      </CollectionView>
+      <Frame x:Name="BuyFrame"  Margin="4,0,8,4" HorizontalOptions="FillAndExpand" VerticalOptions="End" BackgroundColor="{StaticResource StripeBrightGreen}" CornerRadius="4" IsVisible="False">
+        <Frame.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding BuyNowCommand}"/>
+        </Frame.GestureRecognizers>
+        <Grid  >
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Label Text="Buy Now" TextColor="White" HorizontalOptions="CenterAndExpand" Grid.Column="1"/>
+          <Label  Text="{Binding Total, StringFormat='${0:0.00}'}" TextColor="White" HorizontalOptions="EndAndExpand" Grid.Column="2"/>
+        </Grid>
+      </Frame>
+    </Grid>
+  </ContentPage.Content>
+</ContentPage>

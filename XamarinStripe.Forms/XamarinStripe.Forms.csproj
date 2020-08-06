@@ -1,0 +1,92 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\baseline_arrow_forward_black_48dp.png" />
+    <None Remove="Resources\baseline_done_black_48dp.png" />
+    <None Remove="Resources\baseline_navigate_next_black_48dp.png" />
+    <None Remove="Resources\GooglePay_mark_800_gray_3x.png" />
+    <None Remove="Resources\Settings.scale-300.png" />
+    <None Remove="Resources\stp_card_amex%403x.png" />
+    <None Remove="Resources\stp_card_applepay%403x.png" />
+    <None Remove="Resources\stp_card_diners%403x.png" />
+    <None Remove="Resources\stp_card_discover%403x.png" />
+    <None Remove="Resources\stp_card_error%403x.png" />
+    <None Remove="Resources\stp_card_form_back%403x.png" />
+    <None Remove="Resources\stp_card_form_front%403x.png" />
+    <None Remove="Resources\stp_card_jcb%403x.png" />
+    <None Remove="Resources\stp_card_mastercard%403x.png" />
+    <None Remove="Resources\stp_card_unionpay_en%403x.png" />
+    <None Remove="Resources\stp_card_unionpay_zh%403x.png" />
+    <None Remove="Resources\stp_card_unknown%403x.png" />
+    <None Remove="Resources\stp_card_visa%403x.png" />
+    <None Remove="Resources\stp_shipping_form.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\baseline_arrow_forward_black_48dp.png" />
+    <EmbeddedResource Include="Resources\baseline_done_black_48dp.png" />
+    <EmbeddedResource Include="Resources\baseline_navigate_next_black_48dp.png" />
+    <EmbeddedResource Include="Resources\GooglePay_mark_800_gray_3x.png" />
+    <EmbeddedResource Include="Resources\Settings.scale-300.png" />
+    <EmbeddedResource Include="Resources\stp_card_amex@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_applepay@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_diners@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_discover@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_error@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_form_back@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_form_front@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_jcb@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_mastercard@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_unionpay_en@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_unionpay_zh@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_unknown@3x.png" />
+    <EmbeddedResource Include="Resources\stp_card_visa@3x.png" />
+    <EmbeddedResource Include="Resources\stp_shipping_form.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Stripe.net" Version="37.29.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1260" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ShippingAddressPage.xaml.cs">
+      <DependentUpon>ShippingAddressPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\AddCardPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BrowseProductsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CheckoutPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PaymentOptionsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProductView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ShippingAddressPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ShippingMethodPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

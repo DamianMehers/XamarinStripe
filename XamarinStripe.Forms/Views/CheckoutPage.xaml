@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XamarinStripe.Forms.ViewModels;assembly=XamarinStripe.Forms"
+             mc:Ignorable="d"
+             x:DataType="vm:CheckoutViewModel"
+             Title="Checkout"
+             x:Class="XamarinStripe.Forms.Views.CheckoutPage">
+  <ContentPage.Content>
+    <Grid>
+      <ScrollView Margin="16,16,16,0">
+        <ScrollView.Triggers>
+          <DataTrigger TargetType="ScrollView" Binding="{Binding Busy}" Value="true">
+            <Setter Property="IsVisible" Value="false"/>
+          </DataTrigger>
+        </ScrollView.Triggers>
+        <StackLayout>
+
+          <StackLayout BindableLayout.ItemsSource="{Binding Products}">
+            <BindableLayout.ItemTemplate>
+              <DataTemplate x:DataType="vm:ProductViewModel">
+                <StackLayout Orientation="Horizontal">
+                  <Label FontSize="32" Text="{Binding Emoji}" />
+                  <Label VerticalOptions="Center" Text="{Binding Name}" />
+                  <Label Text="{Binding Price, StringFormat='${0:0.00}'}" VerticalOptions="Center"
+                         HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+              </DataTemplate>
+            </BindableLayout.ItemTemplate>
+          </StackLayout>
+          
+          <StackLayout Orientation="Horizontal" Padding="0,16,0,0">
+            <StackLayout.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding SelectShippingAddressCommand}" />
+            </StackLayout.GestureRecognizers>
+            <Label Text="Ship to" FontAttributes="Bold" />
+            <Label Text="{Binding ShipTo}" HorizontalOptions="EndAndExpand" />
+          </StackLayout>
+          
+          <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" />
+
+          <StackLayout Orientation="Horizontal">
+            <StackLayout.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding SelectPaymentOptionCommand}" />
+            </StackLayout.GestureRecognizers>
+            <Label Text="Pay from" FontAttributes="Bold" />
+            <ActivityIndicator IsVisible="{Binding PaymentMethodLoading}" IsRunning="{Binding PaymentMethodLoading}" HorizontalOptions="FillAndExpand" HeightRequest="32" />
+            <Label Text="{Binding PayFrom}" HorizontalOptions="EndAndExpand"  IsVisible="{Binding PaymentMethodLoaded}"/>
+          </StackLayout>
+          
+          <BoxView HeightRequest="1" Color="LightGray" HorizontalOptions="FillAndExpand" />
+
+          <StackLayout Orientation="Horizontal">
+            <Label Text="Total" FontAttributes="Bold" FontSize="Medium" />
+            <Label Text="{Binding Total, StringFormat='${0:0.00}'}" HorizontalOptions="EndAndExpand"
+                   FontAttributes="Bold" FontSize="Medium" />
+          </StackLayout>
+          <Label Text="" Padding="32" />
+
+
+        </StackLayout>
+      </ScrollView>
+
+      <Button Text="Buy" VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" Margin="8,0,8,16" Command="{Binding BuyCommand}"/>
+      <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding Busy}"
+                         IsRunning="{Binding Busy}" />
+
+
+    </Grid>
+  </ContentPage.Content>
+</ContentPage>

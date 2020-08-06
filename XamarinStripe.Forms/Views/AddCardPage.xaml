@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:XamarinStripe.Forms.ViewModels;assembly=XamarinStripe.Forms"
+             mc:Ignorable="d"
+             x:DataType="viewModels:AddCardViewModel"
+             x:Class="XamarinStripe.Forms.Views.AddCardPage">
+  <ContentPage.Content>
+    <Grid BackgroundColor="LightGray">
+      <ScrollView>
+        <StackLayout>
+          <Image x:Name="HeroImage" HeightRequest="96" Margin="48"  />
+          <Label Text="Card" Padding="8" />
+          <ScrollView Orientation="Horizontal" BackgroundColor="White">
+            <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
+              <Image Source="{Binding Image}" WidthRequest="32" Aspect="AspectFit"/>
+              <Entry Placeholder="4242 4242 4242 4242" Text="{Binding Number}" MaxLength="{Binding Length}" Keyboard="Numeric" WidthRequest="160"  Focused="FieldFocused"/>
+              <Entry Placeholder="MM" Text="{Binding Month}" MaxLength="2"  Focused="FieldFocused" />
+              <Label Text="/" VerticalOptions="CenterAndExpand"/>
+              <Entry Placeholder="YY" Text="{Binding Year}" MaxLength="2"  Focused="FieldFocused"/>
+              <Entry Placeholder="CVC"  Keyboard="Numeric" Text="{Binding VerificationCode}" MaxLength="4"  Focused="FieldFocused" x:Name="VerificationCode"/>
+              <Entry Placeholder="Zip" MaxLength="6" Text="{Binding Zip}" Focused="FieldFocused"  />
+
+            </StackLayout>
+          </ScrollView>
+        </StackLayout>
+      </ScrollView>
+    </Grid>
+  </ContentPage.Content>
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Done" Command="{Binding DoneCommand}" IconImageSource="{Binding DoneImage}" />
+  </ContentPage.ToolbarItems>
+</ContentPage>

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:XamarinStripe.Forms.ViewModels;assembly=XamarinStripe.Forms"
+             mc:Ignorable="d"
+             Title="Shipping"
+             x:DataType="vm:ShippingAddressViewModel"
+             BackgroundColor="LightGray"
+             x:Class="XamarinStripe.Forms.Views.ShippingAddressPage">
+  <ContentPage.Content>
+    <Grid>
+      <ScrollView>
+        <ScrollView.Triggers>
+          <DataTrigger TargetType="ScrollView" Binding="{Binding Busy}" Value="true">
+            <Setter Property="Opacity"  Value="0.3"/>
+            <Setter Property="IsEnabled" Value="False"/>
+          </DataTrigger>
+        </ScrollView.Triggers>
+        <StackLayout>
+          <Image Source="{Binding ShippingImage}" HeightRequest="96" Margin="48" />
+          <Label Text="Shipping Address" Padding="8" />
+          <StackLayout BackgroundColor="White" Padding="8">
+            <Entry Text="{Binding Name}" Placeholder="Name" />
+            <Entry Text="{Binding Address}" Placeholder="Address" />
+            <Entry Text="{Binding Apartment}" Placeholder="Apt." />
+            <Picker Title="Country" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" />
+            <Entry Text="{Binding ZipCode}" Placeholder="Zip Code" />
+            <Entry Text="{Binding City}" Placeholder="City" />
+            <Entry Text="{Binding State}" Placeholder="State" />
+            <Entry Text="{Binding Phone}" Placeholder="Phone" Keyboard="Telephone" />
+          </StackLayout>
+        </StackLayout>
+      </ScrollView>
+      <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="{Binding Busy}" IsRunning="{Binding Busy}"/>
+    </Grid>
+  </ContentPage.Content>
+
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Next"  Command="{Binding NextCommand}" IconImageSource="{Binding NextImage}" />
+  </ContentPage.ToolbarItems>
+</ContentPage>

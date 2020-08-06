@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:XamarinStripe.Forms.ViewModels;assembly=XamarinStripe.Forms"
+             mc:Ignorable="d"
+             x:DataType="viewModels:ProductViewModel"
+             x:Class="XamarinStripe.Forms.Views.ProductView">
+  <ContentView.Content>
+    <Frame BorderColor="DarkGray" Margin="8" Padding="0" HasShadow="False" CornerRadius="2">
+      <Frame.GestureRecognizers>
+        <TapGestureRecognizer Command="{Binding ToggleCommand}"/>
+      </Frame.GestureRecognizers>
+      <Frame.Triggers>
+        <DataTrigger TargetType="Frame" Binding="{Binding Selected}" Value="True">
+          <Setter Property="BorderColor" Value="Green"/>
+        </DataTrigger>
+      </Frame.Triggers>
+
+
+
+      <Grid BackgroundColor="LightGray">
+        <Grid.Triggers>
+          <DataTrigger TargetType="Grid" Binding="{Binding Selected}" Value="True">
+            <Setter Property="BackgroundColor" Value="Green"/>
+          </DataTrigger>
+        </Grid.Triggers>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="8*"/>
+          <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="7*"/>
+          <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Label Text="{Binding Emoji}" FontSize="75" BackgroundColor="White" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        <Label Text="{Binding Price, StringFormat='${0:0.00}'}" 
+               TextColor="Black" 
+               FontAttributes="Bold"
+
+               Margin="16,0,0,0"
+               HorizontalOptions="FillAndExpand" 
+               VerticalOptions="CenterAndExpand"
+               Grid.Row="1" Grid.Column="0"/>
+
+        <Button Text="+" HorizontalOptions="End" Padding="0" Margin="0" WidthRequest="32" Command="{Binding ToggleCommand}" Grid.Row="1" Grid.Column="1">
+          <Button.Triggers>
+            <DataTrigger TargetType="Button" Binding="{Binding Selected}" Value="True">
+              <Setter Property="Text" Value="-"/>
+            </DataTrigger>
+          </Button.Triggers>
+
+        </Button>
+      </Grid>
+
+
+    </Frame>
+  </ContentView.Content>
+</ContentView>
