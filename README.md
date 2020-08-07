@@ -38,3 +38,7 @@ If all you are about is how to call the Stripe API from C#, then you'll want to 
 * [ShippingAddressViewModel](XamarinStripe.Forms/ViewModels/ShippingAddressViewModel.cs) which adds a shipping address to a customer
 * [CheckoutViewModel](XamarinStripe.Forms/ViewModels/CheckoutViewModel.cs) which creates a payment intent and confirms it.
 
+
+## Initial author
+
+This example was originally created by [Damian Mehers](https://damian.fyi/)
