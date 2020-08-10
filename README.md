@@ -23,7 +23,7 @@ Here you will find folders for:
 * [Services](XamarinStripe.Forms/Services): These encapsulate discrete functionality such as credit card verification, Product storage (check out the [ProductsDataStoreService](XamarinStripe.Forms/Services/ProductsDataStoreService.cs) for the Emojis that are for sale), and [communication](XamarinStripe.Forms/Services/EphemeralService.cs) with the Heroku based service that we use to not store secrets in the app.
 
 ## Pull requests welcome!
-I implemented some, but by no means all of the functionality from Stripe's iOS and Android examples.  For example I didn't do Apple Pay, not did I set up the Settings page.  None of these are hard, but I spent a weekend doing this first example and I've run out of time.  Please don't hesitate to contribute.
+I implemented some, but by no means all of the functionality from Stripe's iOS and Android examples.  For example I didn't do 3D Secure, Apple Pay, not did I set up the Settings page.  None of these are hard, but I spent a weekend doing this first example and I've run out of time.  Please don't hesitate to contribute.
 
 Also, I am not a Stripe expert.  To be honest I had never used the API before putting this example together, so feel free to let me know if I've made mistakes.
 
