@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Stripe;
 using XamarinStripe.Forms.Services;
 using Xamarin.Forms;
@@ -72,6 +73,51 @@ namespace XamarinStripe.Forms.ViewModels {
       return !Busy && HavePayFrom && HaveShipTo;
     }
 
+
+
+    public class UseStripeSdk {
+      public class DirectoryServerEncryptionKind {
+
+        [JsonProperty("directory_server_id")] public string DirectoryServerId { get; set; }
+
+        [JsonProperty("algorithm")] public string Algorithm { get; set; }
+
+        [JsonProperty("certificate")] public string Certificate { get; set; }
+
+        [JsonProperty("root_certificate_authorities")]
+        public IList<string> RootCertificateAuthorities { get; set; }
+      }
+
+      [JsonProperty("type")] public string Type { get; set; }
+
+      [JsonProperty("three_d_secure_2_source")]
+      public string ThreeDSecure2Source { get; set; }
+
+      [JsonProperty("directory_server_name")]
+      public string DirectoryServerName { get; set; }
+
+      [JsonProperty("server_transaction_id")]
+      public string ServerTransactionId { get; set; }
+
+      [JsonProperty("three_ds_method_url")] public string ThreeDsMethodUrl { get; set; }
+
+      [JsonProperty("three_ds_optimizations")]
+      public string ThreeDsOptimizations { get; set; }
+
+      [JsonProperty("directory_server_encryption")]
+      public DirectoryServerEncryptionKind DirectoryServerEncryption { get; set; }
+    }
+
+    public class Example
+    {
+
+      [JsonProperty("type")]
+      public string Type { get; set; }
+
+      [JsonProperty("use_stripe_sdk")]
+      public UseStripeSdk UseStripeSdk { get; set; }
+    }
+
     private async Task Buy() {
       try {
         Busy = true;
@@ -94,9 +140,16 @@ namespace XamarinStripe.Forms.ViewModels {
           ReturnUrl = "payments-example://stripe-redirect"
         };
         var result = await paymentIntentService.ConfirmAsync(intent, paymentConfirmOptions);
-        // TODO: Something with result?
-        Busy = false;
-        await Navigator.ShowMessage("Success", "Your purchase was successful!");
+        switch (result.NextAction?.Type) {
+          case null:
+            Busy = false;
+            await Navigator.ShowMessage("Success", "Your purchase was successful!");
+            break; // All good
+
+          case "stripe_3ds2_fingerprint":
+          default:
+            throw new NotImplementedException($"Not implemented: Can't handle {result.NextAction.Type}");
+        }
       }
       catch (Exception ex) {
         Busy = false;
