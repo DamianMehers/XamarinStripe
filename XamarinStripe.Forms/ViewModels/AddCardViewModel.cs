@@ -93,14 +93,14 @@ namespace XamarinStripe.Forms.ViewModels {
         // Create the payment method
         var paymentMethodService = new PaymentMethodService(await EphemeralService.Instance.GetClient(true));
         var paymentMethodCreateOptions = new PaymentMethodCreateOptions {
-          Card = new PaymentMethodCardCreateOptions {
+          Card = new PaymentMethodCardOptions {
             Number = Number,
             Cvc = VerificationCode,
             ExpMonth = long.Parse(Month),
             ExpYear = long.Parse(Year)
           },
           Type = "card",
-          BillingDetails = new BillingDetailsOptions {
+          BillingDetails = new PaymentMethodBillingDetailsOptions {
             Address = new AddressOptions {
               PostalCode = Zip
             }

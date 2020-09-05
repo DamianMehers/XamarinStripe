@@ -55,8 +55,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Stripe.net" Version="37.29.0" />
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1260" />
+    <PackageReference Include="Stripe.net" Version="39.2.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
 
